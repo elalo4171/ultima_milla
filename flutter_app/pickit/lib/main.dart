@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pickit/src/config/Routes.dart';
 import 'package:pickit/src/config/Theme.dart';
-import 'package:pickit/src/provider/HomeProvider.dart';
+import 'package:pickit/src/provider/GlobalProvider.dart';
 import 'package:provider/provider.dart';
 
 void main() => runApp(MyApp());
@@ -11,13 +11,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<HomeProvider>(create: (_) => HomeProvider()),
+        ChangeNotifierProvider<GlobalProvider>(create: (_) => GlobalProvider()),
       ],
       child: MaterialApp(
         title: 'Pick it',
-        initialRoute: "homePage",
+        initialRoute: "main",
         onGenerateRoute: routes,
-        theme: SuperSimpleTheme().principalTheme,
+        theme: PickIt().principalTheme,
         debugShowCheckedModeBanner: false,
       ),
     );

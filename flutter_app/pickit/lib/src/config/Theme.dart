@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class SuperSimpleTheme {
-  static const primaryColor = Color(0xFF54C8E2);
+class PickIt {
+  static const primaryColor = Color(0xFF0085AF);
   static const secondaryColor = Color(0xFF74D1E6);
 
   ThemeData get principalTheme {

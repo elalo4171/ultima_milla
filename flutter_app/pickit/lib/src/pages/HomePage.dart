@@ -10,28 +10,66 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return ChangeNotifierProvider(
+      create: (context) => HomeProvider(),
+      builder: (context, child) => Consumer<HomeProvider>(
+        builder: (context, model, _) => BuildHomePage(model: model),
+      ),
+    );
+  }
+}
+
+class BuildHomePage extends StatelessWidget {
+  const BuildHomePage({
+    Key key,
+    @required this.model,
+  }) : super(key: key);
+
+  final HomeProvider model;
+
+  @override
+  Widget build(BuildContext context) {
     Responsive _responsive = Responsive(context);
-    HomeProvider model = Provider.of<HomeProvider>(context);
+
     return Scaffold(
-      body: Container(
-        height: _responsive.height * .6,
-        child: StreamBuilder<CameraPosition>(
-            stream: model.currentPosition,
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                return GoogleMap(
-                  mapType: MapType.normal,
-                  initialCameraPosition: snapshot.data,
-                  onMapCreated: (GoogleMapController controller) {
-                    controller.setMapStyle(Util.mapStyleRetro);
-                  },
-                );
-              } else {
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
-              }
-            }),
+      body: Column(
+        children: [
+          Container(
+            height: _responsive.height * .6,
+            child: StreamBuilder<CameraPosition>(
+                stream: model.currentPosition,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return GoogleMap(
+                      mapType: MapType.normal,
+                      initialCameraPosition: snapshot.data,
+                      onMapCreated: (GoogleMapController controller) {
+                        controller.setMapStyle(Util.mapStyleRetro);
+                        model.googleMapController = controller;
+                      },
+                    );
+                  } else {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                }),
+          ),
+          Container(
+            child: Center(
+              child: Column(
+                children: [
+                  !model.currentPosition.hasValue
+                      ? Container()
+                      : Text(model.currentPosition.value.target.toString()),
+                  RaisedButton(
+                      child: Text("Ok"),
+                      onPressed: () => Navigator.pop(context))
+                ],
+              ),
+            ),
+          )
+        ],
       ),
     );
   }

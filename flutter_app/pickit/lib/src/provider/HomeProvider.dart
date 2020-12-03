@@ -9,6 +9,7 @@ class HomeProvider with ChangeNotifier {
   bool _serviceEnabled;
   PermissionStatus _permissionGranted;
   LocationData locationData;
+  GoogleMapController googleMapController;
 
   var currentPosition = BehaviorSubject<CameraPosition>();
 
@@ -39,6 +40,23 @@ class HomeProvider with ChangeNotifier {
       zoom: 14.4746,
     );
     currentPosition.sink.add(cameraPosition);
+  }
+
+  initTrackerPosition() {
+    location.onLocationChanged.listen((position) {
+      if (googleMapController != null) {
+        LatLng latLng = LatLng(position.latitude, position.longitude);
+        try {
+          googleMapController
+              .animateCamera(CameraUpdate.newCameraPosition(CameraPosition(
+                  target: LatLng(
+                    latLng.latitude,
+                    latLng.longitude,
+                  ),
+                  zoom: 14.47)));
+        } catch (e) {}
+      }
+    });
   }
 
   close() {

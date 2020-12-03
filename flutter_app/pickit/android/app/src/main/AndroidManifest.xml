@@ -11,6 +11,8 @@
         android:icon="@mipmap/ic_launcher">
         <meta-data android:name="com.google.android.geo.API_KEY"
                android:value="AIzaSyDRbtJmYMpQEEDwO0S5iHivupQhAsi0K_I"/>
+               <meta-data android:name="com.here.sdk.access_key_id" android:value="S6J4ptW-xKDUxMbt8bnA5g"/>
+        <meta-data android:name="com.here.sdk.access_key_secret" android:value="l6o3jEwfreRkoWA8rlIn_JYDxPP6ex74ROXK2N3hMQSKteM2JkTp5m9q6vjOs2Rz_0ftgCnrPGKJ7N9fJwdqtA"/>
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

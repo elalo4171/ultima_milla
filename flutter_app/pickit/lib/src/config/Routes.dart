@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:pickit/src/pages/AddressNew.dart';
 import 'package:pickit/src/pages/HomePage.dart';
+import 'package:pickit/src/pages/MainText.dart';
+import 'package:pickit/src/pages/NewVehicule.dart';
 
 Route Function(RouteSettings) get routes => (RouteSettings settings) {
       Route route;
@@ -8,6 +11,21 @@ Route Function(RouteSettings) get routes => (RouteSettings settings) {
         case "homePage":
           route = MaterialPageRoute(
               builder: (_) => HomePage(),
+              settings: RouteSettings(name: settings.name));
+          break;
+        case "main":
+          route = MaterialPageRoute(
+              builder: (_) => MainPage(),
+              settings: RouteSettings(name: settings.name));
+          break;
+        case "addressNew":
+          route = MaterialPageRoute(
+              builder: (_) => AddressNew(),
+              settings: RouteSettings(name: settings.name));
+          break;
+        case "newVehicule":
+          route = MaterialPageRoute(
+              builder: (_) => NewVehicule(),
               settings: RouteSettings(name: settings.name));
           break;
         default:
