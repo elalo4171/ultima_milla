@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:pickit/src/config/Util.dart';
 import 'package:pickit/src/config/responsive.dart';
+import 'package:pickit/src/models/AddressModel.dart';
 import 'package:pickit/src/provider/HomeProvider.dart';
 import 'package:provider/provider.dart';
 
@@ -68,8 +69,49 @@ class BuildHomePage extends StatelessWidget {
                 ],
               ),
             ),
-          )
+          ),
+          Center(
+            child: Text("Siguiente direccion"),
+          ),
+          Container(
+              height: 200,
+              child: ListView.builder(
+                itemBuilder: (context, index) =>
+                    buildAddress(model.address, Theme.of(context)),
+              ))
         ],
+      ),
+    );
+  }
+
+  Container buildAddress(List<AddressModel> list, ThemeData themeData) {
+    return Container(
+      height: 300,
+      child: ListView.builder(
+        itemCount: list.length,
+        itemBuilder: (context, index) {
+          AddressModel addressModel = list[index];
+          return ListTile(
+            trailing: Icon(Icons.pin_drop, color: themeData.accentColor),
+            leading: IconButton(
+                icon: Icon(
+                  Icons.delete,
+                  color: Colors.red,
+                ),
+                onPressed: () {
+                  // model.removeAddress(addressModel);
+                }),
+            title: Text(
+                addressModel.response.view[0].result[0].location.address.label),
+            subtitle: Text(addressModel.response.view[0].result[0].location
+                    .navigationPosition[0].latitude
+                    .toString() +
+                " " +
+                addressModel.response.view[0].result[0].location
+                    .navigationPosition[0].longitude
+                    .toString()),
+          );
+        },
       ),
     );
   }

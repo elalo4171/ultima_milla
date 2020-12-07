@@ -37,4 +37,9 @@ class AddressProvider with ChangeNotifier {
       notifyListeners();
     }
   }
+
+  removeAddress(AddressModel addressModel) {
+    address.removeWhere((element) => addressModel == element);
+    notifyListeners();
+  }
 }

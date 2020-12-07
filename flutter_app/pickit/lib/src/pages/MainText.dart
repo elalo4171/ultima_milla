@@ -18,7 +18,7 @@ class MainPage extends StatelessWidget {
                 child: Text("Mandar ubicacion en tiempo real"),
                 onPressed: () => Navigator.pushNamed(context, "homePage")),
             RaisedButton(
-                child: Text("Agregar una direccion"),
+                child: Text("Crear una ruta"),
                 onPressed: () => Navigator.pushNamed(context, "addressNew")),
             RaisedButton(
                 child: Text("Agregar un vehiculo"),

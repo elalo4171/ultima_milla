@@ -26,7 +26,7 @@ class VehiculeProvider with ChangeNotifier {
   String transmManual;
 
   doPost() async {
-    var url = 'http://09260d8904d0.ngrok.io/predict';
+    var url = 'http://c22961f66003.ngrok.io/predict';
     var response = await http.post(url, body: {
       "combustibleConsumido": combustibleConsumido,
       "km": km,

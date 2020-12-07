@@ -1,0 +1,30 @@
+<html>
+    <body>
+        <div class="content" id="main-content">
+
+        <center>
+
+        <h1> Iris flower detection </h1><br>
+        
+        <form method="POST", action="{{url_for('home')}}">
+           <b> Sepal Length :  <input type="text", name='a', placeholder="enter 1"> <br><br>
+            Second value :  <input type="text", name='b', placeholder="enter 2"> <br><br>
+            Third value :  <input type="text", name='c', placeholder="enter 3"> <br><br>
+            Fourth value : <input type="text", name='d', placeholder="enter 4"> <br><br><br></b>
+            <input type="submit" , value='predict!' >
+        </form>
+
+        <img src='static\flower1.jpg' alt="flower">
+        
+    </center>
+    </div>
+    </body>
+</html>
+
+
+<style>
+
+    .content {
+        background: linear-gradient(to bottom, #ff66ff 0%, #66ffff 100%);
+    }
+</style>

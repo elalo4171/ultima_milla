@@ -30,14 +30,14 @@ class BuildAddressNew extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Nueva direccion"),
+        title: Text("Creando ruta optimizada"),
       ),
       body: Form(
         key: model.form,
         child: SingleChildScrollView(
           child: Column(
             children: [
-              buildAddress(model.address),
+              buildAddress(model.address, Theme.of(context)),
               TextFormField(
                 validator: requiredField,
                 decoration: InputDecoration(
@@ -90,12 +90,24 @@ class BuildAddressNew extends StatelessWidget {
                 height: 30,
               ),
               RaisedButton(
-                  child: Text("Guardar"),
+                  child: Text("Agregar direccion"),
                   onPressed: () {
                     if (model.isValidForm) {
                       model.doPost();
                     }
-                  })
+                  }),
+              RaisedButton(
+                  child: Text("Evitar direccion"),
+                  onPressed: () {
+                    if (model.isValidForm) {
+                      model.doPost();
+                    }
+                  }),
+              RaisedButton(
+                  child: Text("Crear ruta"),
+                  onPressed: () {
+                    if (model.address.length > 1) {}
+                  }),
             ],
           ),
         ),
@@ -103,7 +115,7 @@ class BuildAddressNew extends StatelessWidget {
     );
   }
 
-  Container buildAddress(List<AddressModel> list) {
+  Container buildAddress(List<AddressModel> list, ThemeData themeData) {
     return Container(
       height: 300,
       child: ListView.builder(
@@ -111,9 +123,24 @@ class BuildAddressNew extends StatelessWidget {
         itemBuilder: (context, index) {
           AddressModel addressModel = list[index];
           return ListTile(
-            leading: Icon(Icons.pin_drop),
+            trailing: Icon(Icons.pin_drop, color: themeData.accentColor),
+            leading: IconButton(
+                icon: Icon(
+                  Icons.delete,
+                  color: Colors.red,
+                ),
+                onPressed: () {
+                  model.removeAddress(addressModel);
+                }),
             title: Text(
                 addressModel.response.view[0].result[0].location.address.label),
+            subtitle: Text(addressModel.response.view[0].result[0].location
+                    .navigationPosition[0].latitude
+                    .toString() +
+                " " +
+                addressModel.response.view[0].result[0].location
+                    .navigationPosition[0].longitude
+                    .toString()),
           );
         },
       ),
